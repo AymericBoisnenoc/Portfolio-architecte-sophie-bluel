@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const emailInput = document.querySelector('#email');
         const passwordInput = document.querySelector('#password');
+        const erreurMsg = document.querySelector('#user-login-form p');
 
         const user = {
             email: emailInput.value,
@@ -24,20 +25,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Email ou mot de passe incorrects, ajoutez une bordure rouge aux champs
                 emailInput.style.border = '1px solid red';
                 passwordInput.style.border = '1px solid red';
-				alert('les identifiants sont incorrect')
+                erreurMsg.textContent = 'Email ou mot de passe invalide';
+                erreurMsg.style.color = 'red';
             } else if (response.status === 200) {
+                data = response.json()
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('userId', data.userId);
+                window.sessionStorage.setItem('loged', 'true'); // Définir loged à true dans sessionStorage
                 console.log("Authentification réussie.");
-                return response.json();
+                // Rediriger vers 'index.html'
+                location.href = 'index.html';
             } else {
                 alert("Erreur inconnue!");
             }
-        })
-        .then(function(data) {
-            console.log(data);
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('userId', data.userId);
-            // Rediriger vers 'index.html'
-            location.href = 'index.html';
         })
         .catch(function(err) {
             console.log(err);
