@@ -63,6 +63,8 @@ function genererMenuCategories() {
         button.dataset.categoryId = category;
         button.addEventListener('click', () => filtrerGalerie(category));
         categoryContainer.appendChild(button);
+        categoryContainer.style.display = "flex";
+        categoryContainer.style.justifyContent = "center";
     });
 
     const allButton = document.createElement('button');
@@ -101,11 +103,24 @@ function filtrerGalerie(selectedCategoryId) {
 const loged = window.sessionStorage.getItem('loged'); // Utiliser getItem pour récupérer la valeur
 
 console.log(loged);
-
-const admin = document.querySelector('header nav .admin');
 const logout = document.querySelector('header nav .logout');
 
 if (loged === 'true') { // Utiliser === pour comparer correctement
-    admin.textContent = 'admin';
     logout.textContent = 'logout';
+    logout.classList = 'logout_selected';
 }
+
+// Sélectionnez le bouton "logout"
+let logoutBtn = document.querySelector('header nav .logout_selected');
+// Ajoutez un écouteur d'événements pour le clic sur le bouton "logout"
+logoutBtn.addEventListener('click', function(event) {
+    event.preventDefault();
+    // Afficher une alerte indiquant que l'utilisateur a été déconnecté
+    alert("Vous avez été déconnecté.");
+
+    // Effacer les informations d'authentification de l'utilisateur du localStorage
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    
+    // Vous pouvez également effacer d'autres données d'utilisateur si nécessaire
+});

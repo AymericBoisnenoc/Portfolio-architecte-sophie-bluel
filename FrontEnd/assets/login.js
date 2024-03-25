@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 emailInput.style.border = '1px solid red';
                 passwordInput.style.border = '1px solid red';
                 erreurMsg.textContent = 'Email ou mot de passe invalide';
+                erreurMsg.style.paddingBottom = '10px'
                 erreurMsg.style.color = 'red';
             } else if (response.status === 200) {
                 data = response.json()

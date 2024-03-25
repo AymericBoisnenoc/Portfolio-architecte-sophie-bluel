@@ -100,6 +100,9 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+a:hover {
+	color: #B1663C;
+}
 #introduction {
 	display: flex;
 	align-items: center;
@@ -198,6 +201,16 @@ footer nav ul {
     font-size: 16px;
     color: #1D6154;
 }
+footer{
+    background-color: white;
+    padding: 2px;
+}
+
+button:hover{
+	color:#FFFEF8;
+	background-color:#1D6154;
+}
+/*-- PAGE LOGIN -- */
 
 header nav ul li a  {
 	color: black;
@@ -220,8 +233,10 @@ input {
 	margin-top: 10px;
 	margin-bottom: 10px;
 	position: relative;
-	left: 34%;
 	border: none;
 	box-shadow: 2px 10px 15px lightgrey;
     width: 300px; /* Ajustez la largeur selon vos besoins */
+}
+#submit {
+	margin-left: 75px;
 }
