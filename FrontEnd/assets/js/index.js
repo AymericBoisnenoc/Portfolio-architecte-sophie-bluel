@@ -55,11 +55,17 @@ function afficherGalerie() {
 function genererMenuCategories() {
     const categories = [...new Set(tableau.map(item => item.categoryId))];
     const categoryContainer = document.querySelector('.categories');
+    const categoryNames = {
+        1:"Objets",
+        2:"Appartements",
+        3:"Hotels & restaurants",
+        4:"Tous"
+    }
 
     categories.forEach(category => {
         const button = document.createElement('button');
         button.classList.add('category-button');
-        button.textContent = `Catégorie ${category}`;
+        button.textContent = categoryNames[category];
         button.dataset.categoryId = category;
         button.addEventListener('click', () => filtrerGalerie(category));
         categoryContainer.appendChild(button);
@@ -72,6 +78,12 @@ function genererMenuCategories() {
     allButton.textContent = 'Toutes les catégories';
     allButton.addEventListener('click', () => filtrerGalerie(0));
     categoryContainer.appendChild(allButton);
+
+    // ajout d'un if pour lorsque l'utilisateur se connecte masquer les boutons
+    if (loged === 'true'){
+        allButton.style.display = 'none'
+        categoryContainer.style.display = 'none'
+    }
 }
 
 function filtrerGalerie(selectedCategoryId) {
