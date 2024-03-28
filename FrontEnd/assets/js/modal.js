@@ -17,17 +17,23 @@ document.addEventListener('DOMContentLoaded', function() {
         modaleBtn.appendChild(imgBtn);
         modaleBtn.appendChild(btnText);
         container.appendChild(modaleBtn);
-
+        
         const modale = document.createElement("div")
         const modaleContent = document.createElement("div")
         const modaleClose = document.createElement("span")
-
+        
         modale.classList.add('modal')
         modale.id = "MaModale"
         modaleContent.classList.add('modal-content')
+        modaleContent.innerHTML = `
+        <p>Texte à l'intérieur de la modale.</p>
+        <input type="text" placeholder="Entrer du texte">
+        <input type="number" placeholder="Entrer un nombre">
+        <button>Valider</button> `
         modaleClose.classList.add("close")
-
+        
         modale.appendChild(modaleContent)
+        container.appendChild(modale);
         modale.appendChild(modaleClose)
 
         modaleBtn.onclick = function(){
