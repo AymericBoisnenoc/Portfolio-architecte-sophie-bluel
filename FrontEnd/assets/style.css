@@ -298,3 +298,14 @@ input {
 	display: flex;
 	flex-direction: row;
   }
+
+i, .fa-solid .fa-trash-can .delete{
+
+	position: relative;
+	bottom: 125px;
+	left: 70px;
+	color: white;
+	font-size: 16px;
+	padding: 5px;
+	background-color: black;
+}
