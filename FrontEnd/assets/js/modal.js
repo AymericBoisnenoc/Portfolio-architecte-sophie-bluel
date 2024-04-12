@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const modaleContent = document.createElement("div");
                 const modaleClose = document.createElement("span");
 
+
                 modale.classList.add('modal');
                 modale.id = "MaModale";
                 modaleContent.classList.add('modal-content');
@@ -43,7 +44,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             <figure class="gallery-modal-work">
                                 <img src="${work.imageUrl}">
                                 <i class="fa-solid fa-trash-can delete" data-id="${work.id}"></i>
-                            </figure>`;
+                            </figure>
+                            `;
                     }
                     // Ajout de la galerie à la modaleContent
                     modaleContent.innerHTML = galleries;
@@ -69,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 modale.appendChild(modaleContent);
                 container.appendChild(modale);
                 modaleContent.appendChild(modaleClose);
+                modaleContent.appendChild(modaleBouton)
 
                 modaleBtn.onclick = function() {
                     modale.style.display = "block";
@@ -88,11 +91,20 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => {
                 console.error('Erreur :', error);
             });
+
+            const modaleBouton = document.createElement("button");
+            modaleBouton.textContent = "Ajouter une image";
+            modaleBouton.onclick = function(){
+                modale.style.display = "none"
+            }
+
     }
     function supprimerImage(imageId) {
         const init ={
             method: "DELETE",
-            headers: {"Content-Type": "application/json"},
+            headers: {"Content-Type": "application/json","Authorization":"Bearer "+localStorage.getItem("token")},
+            
+            
         };
         fetch("http://localhost:5678/api/works/" + imageId, init)
         .then(response => {
@@ -107,3 +119,5 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Faire un POST pour ajouter des photos 

@@ -29,13 +29,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 erreurMsg.style.paddingBottom = '10px'
                 erreurMsg.style.color = 'red';
             } else if (response.status === 200) {
-                data = response.json()
+                response.json().then(function (data){
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('userId', data.userId);
                 window.sessionStorage.setItem('loged', 'true'); // Définir loged à true dans sessionStorage
                 console.log("Authentification réussie.");
                 // Rediriger vers 'index.html'
+                console.log(data)
                 location.href = 'index.html';
+                })
             } else {
                 alert("Erreur inconnue!");
             }
