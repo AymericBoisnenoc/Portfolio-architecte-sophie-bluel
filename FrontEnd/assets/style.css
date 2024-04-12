@@ -347,19 +347,7 @@ i, .fa-solid .fa-trash-can .delete{
     bottom: 66%;
 }
 
-.preview-image {
-    max-width: 100%; /* Limite la largeur de l'image à 100% de la largeur du conteneur */
-    max-height: 100%; /* Limite la hauteur de l'image à 100% de la hauteur du conteneur */
-    object-fit: contain; /* Redimensionne proportionnellement l'image pour qu'elle rentre dans le conteneur */
-}
-
-.modal-content.modalAddPhoto {
-    position: relative; /* Assurez-vous que le positionnement est relatif pour permettre le positionnement absolu de l'aperçu de l'image */
-}
-
-.preview-image {
-    position: absolute; /* Positionne l'aperçu de l'image en dehors du flux normal du document */
-    top: 0; /* Positionne l'aperçu de l'image en haut du conteneur */
-    left: 0; /* Positionne l'aperçu de l'image à gauche du conteneur */
-    z-index: 1; /* Assure que l'aperçu de l'image est au-dessus du bouton */
+img .preview-image {
+	width: 20%;
+	object-fit: cover;
 }
