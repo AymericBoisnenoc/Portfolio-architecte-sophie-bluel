@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
+    
+    let modale;
+    
     if (loged === 'true') { // Correction de la variable 'loged'
         console.log('La modale peut être ouverte');
 
@@ -30,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 const modale = document.createElement("div");
                 const modaleContent = document.createElement("div");
                 const modaleClose = document.createElement("span");
-
 
                 modale.classList.add('modal');
                 modale.id = "MaModale";
@@ -71,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 modale.appendChild(modaleContent);
                 container.appendChild(modale);
                 modaleContent.appendChild(modaleClose);
-                modaleContent.appendChild(modaleBouton)
 
                 modaleBtn.onclick = function() {
                     modale.style.display = "block";
@@ -87,24 +88,79 @@ document.addEventListener('DOMContentLoaded', function() {
                 modaleClose.onclick = function() {
                     modale.style.display = "none";
                 }
+
+                const modaleBouton = document.createElement("button");
+                modaleBouton.textContent = "Ajouter une image";
+                modaleBouton.onclick = function(){
+                    modale.style.display = "none";
+                    modaleAjoutImage.style.display = "block";
+                }
+                modaleContent.appendChild(modaleBouton);
+
+                const modaleAjoutImage = document.createElement("div");
+                modaleAjoutImage.classList.add("modal");
+                modaleAjoutImage.style.display = "none";
+                modaleAjoutImage.innerHTML = `
+                    <form class="modal-content modalAddPhoto">
+                            <span class="back"><i class="fa-solid fa-arrow-left"></i></span>
+                            <span class="close">&times;</span>
+                            <h2>Ajouter photo</h2>
+                            <label for="photo">Image</label>
+                            <button class="index0">
+                                <input class="index1" type="file" name="photo" id="photo" required>
+                                <p class="index0"> + Ajouter une photo</p>
+                            </button>
+                            <i class="fa-solid fa-image"></i>
+                            <img class="preview-image" src="">
+                            <p class="preview-image"> Aperçu de l'image sélectionnée</p>
+                            <label for="title">Titre</label>
+                            <input type="text" name="title" placeholder="Titre de l'image" required>
+                            <label for="category">Catégorie</label>
+                            <select name="category" id="category" required></select>
+                            <input type="submit" value="Valider">
+                    </form>
+                `;
+
+                const retourBtn = modaleAjoutImage.querySelector(".back");
+                retourBtn.addEventListener("click", function(){
+                    modaleAjoutImage.style.display = "none";
+                    modale.style.display = "block";
+                });
+
+                container.appendChild(modaleAjoutImage);
+
+                const closeBtn = modaleAjoutImage.querySelector(".close");
+                closeBtn.addEventListener("click", function() {
+                    modaleAjoutImage.style.display = "none";
+                });
+
+                const ajoutImageForm = modaleAjoutImage.querySelector("form");
+                ajoutImageForm.addEventListener("submit", function(event) {
+                    event.preventDefault(); // Empêcher la soumission du formulaire
+                    // Insérer ici la logique pour envoyer les données au serveur
+                    // Une fois terminé, vous pouvez masquer la modale avec modaleAjoutImage.style.display = "none";
+                });
+
+                // Gestion de l'aperçu de l'image sélectionnée
+                const previewImg = modaleAjoutImage.querySelector(".preview-image");
+                const inputFile = modaleAjoutImage.querySelector("input[type=file]");
+                inputFile.addEventListener("change", function(){
+                    const file = this.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(){
+                            previewImg.src = reader.result;
+                        }
+                        reader.readAsDataURL(file);
+                    }
+                });
             })
-            .catch(error => {
-                console.error('Erreur :', error);
-            });
-
-            const modaleBouton = document.createElement("button");
-            modaleBouton.textContent = "Ajouter une image";
-            modaleBouton.onclick = function(){
-                modale.style.display = "none"
-            }
-
     }
+
     function supprimerImage(imageId) {
         const init ={
             method: "DELETE",
-            headers: {"Content-Type": "application/json","Authorization":"Bearer "+localStorage.getItem("token")},
-            
-            
+            headers: {"Content-Type": "application/json","Authorization":"Bearer "+localStorage.getItem("token")},        
         };
         fetch("http://localhost:5678/api/works/" + imageId, init)
         .then(response => {
@@ -115,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
             supprimerImageDuTableau(imageId);
         })
         .catch(error => {
-            console.error('Erreur lors de la suppression de l\'image :', error);
+            console.error('Erreur lors de la suppression de l\'image :)')
         });
     }
 });
