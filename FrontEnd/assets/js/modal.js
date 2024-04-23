@@ -94,6 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 modaleBouton.onclick = function(){
                     modale.style.display = "none";
                     modaleAjoutImage.style.display = "block";
+                    displayCategoryModal(); // Appel de la fonction pour afficher les catégories
                 }
                 modaleContent.appendChild(modaleBouton);
 
@@ -134,14 +135,34 @@ document.addEventListener('DOMContentLoaded', function() {
                     modaleAjoutImage.style.display = "none";
                 });
 
-                const ajoutImageForm = modaleAjoutImage.querySelector("form");
-                ajoutImageForm.addEventListener("submit", function(event) {
-                    event.preventDefault(); // Empêcher la soumission du formulaire
-                    // Insérer ici la logique pour envoyer les données au serveur
-                    // Une fois terminé, vous pouvez masquer la modale avec modaleAjoutImage.style.display = "none";
-                });
+                async function displayCategoryModal (){
+                    const select = document.querySelector('.modalAddPhoto select[name="category"]');
+                    const categorys = await getCategorys();
+                    categorys.forEach(category => {
+                        const option = document.createElement("option");
+                        option.value = category.id;
+                        option.textContent = category.name;
+                        select.appendChild(option);
+                    });
 
-                // Gestion de l'aperçu de l'image sélectionnée
+                    const form = document.querySelector(".modalAddPhoto form");
+                    const title = document.querySelector(".modalAddPhoto input[name='title']");
+                    const category = document.querySelector(".modalAddPhoto select[name='category']");
+
+                    form.addEventListener("submit", async (e) => {
+                        e.preventDefault(); // Empêcher la soumission du formulaire
+
+                        const formData = new FormData(form);
+                        const imageData = {
+                            title: title.value,
+                            category: category.value,
+                            photo: formData.get("photo"),
+                        };
+
+                        ajouterImage(imageData);
+                    });
+                }
+
                 const previewImg = modaleAjoutImage.querySelector(".preview-image");
                 const inputFile = modaleAjoutImage.querySelector("input[type=file]");
                 inputFile.addEventListener("change", function(){
@@ -155,6 +176,37 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
             })
+    }
+                // Faire un POST pour ajouter des photos
+    function ajouterImage(imageData) {
+        const init ={
+            title:title.value,
+            categoryId:category.value,
+            imageUrl:previewImg.src,
+            category:{
+                id:category.value,
+                name: category.options[category.selectedIndex].textContent,
+            },
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization":"Bearer " + localStorage.getItem("token")
+            },
+            body: JSON.stringify(imageData)
+        };
+        
+        fetch("http://localhost:5678/api/works", init)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur lors de l\'ajout de l\'image');
+            }
+            console.log('Image ajoutée avec succès');
+            // Rafraîchir la galerie après l'ajout de l'image
+            refreshGallery();
+        })
+        .catch(error => {
+            console.error('Erreur lors de l\'ajout de l\'image :)')
+        });
     }
 
     function supprimerImage(imageId) {
@@ -174,6 +226,13 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Erreur lors de la suppression de l\'image :)')
         });
     }
-});
 
-// Faire un POST pour ajouter des photos 
+    async function getCategorys() {
+        const response = await fetch('http://localhost:5678/api/categories');
+        if (!response.ok) {
+            throw new Error('Erreur lors de la récupération des catégories');
+        }
+        const data = await response.json();
+        return data;
+    }
+});
