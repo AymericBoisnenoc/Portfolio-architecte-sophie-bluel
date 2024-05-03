@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         galleries += `
                             <figure class="gallery-modal-work">
                                 <img src="${work.imageUrl}">
-                                <i class="fa-solid fa-trash-can delete" data-id="${work.id}"></i>
+                                <i class="fa-solid fa-trash-can delete-icon" data-id="${work.id}"></i>
                             </figure>
                             `;
                     }
@@ -96,7 +96,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     modaleAjoutImage.style.display = "block";
                     displayCategoryModal(); // Appel de la fonction pour afficher les catégories
                 }
+                modaleBouton.style.fontFamily = "'Syne'";
+                modaleBouton.style.fontWeight = "700";
+                modaleBouton.style.color = "white";
+                modaleBouton.style.backgroundColor = "#1D6154";
+                modaleBouton.style.width = "180px";
+                modaleBouton.style.textAlign = "center";
+                modaleBouton.style.borderRadius = "60px";
+                modaleBouton.style.padding = "7%";
+                modaleBouton.style.marginTop = "62%";
+                
                 modaleContent.appendChild(modaleBouton);
+                
 
                 const modaleAjoutImage = document.createElement("div");
                 modaleAjoutImage.classList.add("modal");
@@ -106,14 +117,12 @@ document.addEventListener('DOMContentLoaded', function() {
                             <span class="back"><i class="fa-solid fa-arrow-left"></i></span>
                             <span class="close">&times;</span>
                             <h2>Ajouter photo</h2>
-                            <label for="photo">Image</label>
                             <button class="index0">
                                 <input class="index1" type="file" name="photo" id="photo" required>
                                 <p class="index0"> + Ajouter une photo</p>
                             </button>
                             <i class="fa-solid fa-image"></i>
                             <img class="preview-image" src="">
-                            <p class="preview-image"> Aperçu de l'image sélectionnée</p>
                             <label for="title">Titre</label>
                             <input type="text" name="title" placeholder="Titre de l'image" required>
                             <label for="category">Catégorie</label>
