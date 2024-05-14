@@ -255,16 +255,16 @@ input {
 
 .modal-content {
 	position: relative;
-	background-color: #fefefe;
-	margin: 15% auto;
-	padding: 20px;
-	border: 1px solid #888;
-	width: 80%;
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 19px;
-	align-items: stretch;
-	justify-items: center;
+    background-color: #fefefe;
+    margin: 7% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 33%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    align-items: baseline;
+    justify-items: center;
 }
 
 .close {

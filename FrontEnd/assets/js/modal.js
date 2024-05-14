@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 modaleBouton.style.fontWeight = "700";
                 modaleBouton.style.color = "white";
                 modaleBouton.style.backgroundColor = "#1D6154";
-                modaleBouton.style.width = "180px";
+                modaleBouton.style.width = "130%";
                 modaleBouton.style.textAlign = "center";
                 modaleBouton.style.borderRadius = "60px";
                 modaleBouton.style.padding = "7%";
@@ -121,7 +121,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 <input type="submit" value="Valider">
             </form>
                 `;
-
                 const retourBtn = modaleAjoutImage.querySelector(".back");
                 retourBtn.addEventListener("click", function(){
                     modaleAjoutImage.style.display = "none";
@@ -222,6 +221,22 @@ function ajouterImage(imageData) {
             console.error('Erreur lors de l\'ajout de l\'image :', error);
         });
 }
+function refreshGallery() {
+    fetch('http://localhost:5678/api/works')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur lors de la récupération des données de l\'API');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Une fois les données récupérées, afficher à nouveau la galerie
+            afficherGalerie(data);
+        })
+        .catch(error => {
+            console.error('Erreur lors de l\'actualisation de la galerie :', error);
+        });
+}
 
 function supprimerImage(imageId) {
     const init ={
@@ -235,6 +250,7 @@ function supprimerImage(imageId) {
             }
             console.log('Image supprimée avec succès');
             supprimerImageDuTableau(imageId);
+            refreshGallery();
         })
         .catch(error => {
             console.error('Erreur lors de la suppression de l\'image :', error);
