@@ -31,14 +31,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 modale = document.createElement("div");
                 const modaleContent = document.createElement("div");
                 const modaleText = document.createElement("div");
+                const modaleFigure = document.createElement("div");
                 const modaleClose = document.createElement("span");
                 
-                modaleText.innerHTML = `<h1 class="modale-txt" style="font-family:Syne;color:black;">Galerie photos</h1>`
+                modaleText.innerHTML = `<h1 class="modale-txt" style="font-family:Syne;color:black;margin-top:6%;margin-bottom:7%;text-align:center">Galerie photos</h1>`
                 modaleText.classList.add('modale-texte')
 
                 modale.classList.add('modal');
                 modale.id = "MaModale";
                 modaleContent.classList.add('modal-content');
+                modaleFigure.classList.add('modale-figure')
 
                 function afficherGalerie(object) {
                     let galleries = "";
@@ -50,9 +52,9 @@ document.addEventListener('DOMContentLoaded', function() {
                             </figure>
                             `;
                     }
-                    modaleContent.innerHTML = galleries;
+                    modaleFigure.innerHTML = galleries;
 
-                    const deleteIcons = modaleContent.querySelectorAll('.delete-icon');
+                    const deleteIcons = modaleFigure.querySelectorAll('.delete-icon');
                     deleteIcons.forEach(icon => {
                         icon.addEventListener('click', async function(event) {
                             event.stopPropagation();
@@ -67,9 +69,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 modaleClose.classList.add("close");
                 modale.appendChild(modaleContent);
-                modaleContent.appendChild(modaleText)
+                modaleContent.appendChild(modaleText);
                 container.appendChild(modale);
                 modaleContent.appendChild(modaleClose);
+                modaleContent.appendChild(modaleFigure);
 
 
                 modaleBtn.onclick = function() {
@@ -99,11 +102,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 modaleBouton.style.fontWeight = "700";
                 modaleBouton.style.color = "white";
                 modaleBouton.style.backgroundColor = "#1D6154";
-                modaleBouton.style.width = "130%";
+                modaleBouton.style.width = "40%";
                 modaleBouton.style.textAlign = "center";
                 modaleBouton.style.borderRadius = "60px";
-                modaleBouton.style.padding = "7%";
-                modaleBouton.style.marginTop = "62%";
+                modaleBouton.style.padding = "3%";
+                modaleBouton.style.marginTop = "20%";
 
                 modaleContent.appendChild(modaleBouton);
 
@@ -121,10 +124,9 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div id="imagePreview" class="index0 image-preview">+ Ajouter une photo</div>
                         </label>
                         <i class="fa-solid fa-image"></i>
-                        <img class="preview-image" src="" style="display: none;"> <!-- Ajout de l'image avec style display: none; -->
-                        <label for="title">Titre</label>
+                        <label for="title" class="label-txt label-titre">Titre</label>
                         <input type="text" name="title" placeholder="Titre de l'image" required>
-                        <label for="category">Catégorie</label>
+                        <label for="category" class="label-txt">Catégorie</label>
                         <select name="category" id="category" required></select>
                         <input type="submit" value="Valider">
                     </form>
