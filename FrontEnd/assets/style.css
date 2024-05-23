@@ -339,6 +339,7 @@ i,
     left: 36%;
 }
 
+
 .fa-image {
 	color: black;
 	display: flex;
@@ -366,17 +367,21 @@ i,
     width: 72%;
 }
 .image-preview {
-    position: absolute;
+    position: relative;
     background-color: rgb(232, 241, 246);
-    border: 1px solid;
-    width: 100%;
-    /* padding-left: 59%; */
-    /* padding-right: 59%; */
-    height: 150px;
+    /* border: 1px solid; */
+    width: 500px;
+    right: 100%;
+    /* left: -81%; */
+    margin-left: -50%;
+    height: 45%;
     display: flex;
-    align-items: center;
+    /* align-items: end; */
     justify-content: center;
     text-align: center;
     color: #888;
     font-size: 16px;
+	img {
+		width: 20%;
+	}
 }
