@@ -233,8 +233,7 @@ input,select {
 
 .modaleBtn {
 	position: absolute;
-	top: 56%;
-	left: 58%;
+	left: 62%;
 	font-weight: bold;
 	border: none;
 	background-color: #FFFEF8;
@@ -261,7 +260,7 @@ input,select {
     margin: 7% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 33%;
+    width: 46%;
     justify-items: center;
 }
 .modale-figure {
@@ -269,7 +268,7 @@ input,select {
     grid-template-columns: repeat(5, 17%);
     gap: 18px;
     align-items: baseline;
-	margin: 9%;
+	margin-top: 9%;
 }
 .close {
 	position: absolute;
@@ -329,7 +328,7 @@ i,
 
 .index1 {
 	z-index: 1;
-	max-width: 18%;
+	max-width: 30%;
 }
 
 .preview-image {
@@ -341,11 +340,12 @@ i,
 
 
 .fa-image {
-	color: black;
+	color: lightgrey;
 	display: flex;
 	position: absolute;
-	left: 49%;
+	left: 45%;
 	bottom: 66%;
+	font-size: 80px;
 }
 
 .label-txt {
@@ -367,21 +367,30 @@ i,
     width: 72%;
 }
 .image-preview {
-    position: relative;
-    background-color: rgb(232, 241, 246);
+    background-color: lightgray;
     /* border: 1px solid; */
-    width: 500px;
-    right: 100%;
-    /* left: -81%; */
-    margin-left: -50%;
-    height: 45%;
+	border-radius: 15%;
+    height: 7%;
     display: flex;
-    /* align-items: end; */
+	align-items: center;
     justify-content: center;
     text-align: center;
     color: #888;
     font-size: 16px;
+	position: absolute;
+	width: 22%;
+	top: 33%;
+    left: 40%;
 	img {
-		width: 20%;
+		width: 100%;
+		position: relative;
+        bottom: 88%;
 	}
+}
+
+.image-container {
+	padding-bottom: 15%;
+	background-color:rgb(232, 241, 246);
+	width: 100%;
+	height: 140px;
 }

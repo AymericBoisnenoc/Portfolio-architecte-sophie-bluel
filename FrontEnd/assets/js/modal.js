@@ -23,10 +23,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 imgBtn.style.marginRight = '5px';
                 const btnText = document.createElement('span');
                 btnText.textContent = 'Modifier';
+                let h2Element = container.querySelector('h2')
 
                 modaleBtn.appendChild(imgBtn);
                 modaleBtn.appendChild(btnText);
                 container.appendChild(modaleBtn);
+                container.insertBefore(modaleBtn,h2Element)
 
                 modale = document.createElement("div");
                 const modaleContent = document.createElement("div");
@@ -119,11 +121,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         <span class="close">&times;</span>
                         <h2>Ajouter photo</h2>
                         <!-- Utilisation d'une étiquette pour styliser la zone de sélection de fichier -->
-                        <label for="photo" class="index1 image-input-label">
-                            <input type="file" name="photo" id="photo" accept="image/*" style="display: none;">
-                            <div id="imagePreview" class="index0 image-preview">+ Ajouter une photo</div>
-                        </label>
-                        <i class="fa-solid fa-image"></i>
+                        <div class="image-container">
+                            <label for="photo" class="index1 image-input-label">
+                                <input type="file" name="photo" id="photo" accept="image/*" style="display: none;">
+                                <div id="imagePreview" class="index0 image-preview">+ Ajouter une photo</div>
+                            </label>
+                            <i class="fa-solid fa-image"></i>
+                        </div>
                         <label for="title" class="label-txt label-titre">Titre</label>
                         <input type="text" name="title" placeholder="Titre de l'image" required>
                         <label for="category" class="label-txt">Catégorie</label>
@@ -186,6 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         reader.onload = function(e) {
                             const imagePreview = document.getElementById('imagePreview');
                             const previewImage = document.querySelector('.preview-image');
+                            const imageIcon = document.getElementsByClassName('.fa-image')
                             imagePreview.innerHTML = ''; // Efface tout contenu précédent
                 
                             const img = document.createElement('img');
