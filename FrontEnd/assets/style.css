@@ -159,7 +159,7 @@ input[type="submit"] {
 	color: white;
 	background-color: #1D6154;
 	margin: 2em auto;
-	width: 180px;
+	width: 40%;
 	text-align: center;
 	border-radius: 60px;
 }
@@ -225,6 +225,9 @@ input,select {
 	box-shadow: 2px 3px 16px lightgrey;
 	width: 80%; /* Ajustez la largeur selon vos besoins */
 	font-size: large;
+}
+select {
+	width: 83%;
 }
 
 #submit {
@@ -343,8 +346,8 @@ i,
 	color: lightgrey;
 	display: flex;
 	position: absolute;
-	left: 45%;
-	bottom: 66%;
+	left: 47%;
+	bottom: 67%;
 	font-size: 80px;
 }
 
@@ -381,16 +384,27 @@ i,
 	width: 22%;
 	top: 33%;
     left: 40%;
+	z-index: 1;
+    cursor: pointer;
 	img {
 		width: 100%;
 		position: relative;
         bottom: 88%;
+		height: 297px;
 	}
 }
 
 .image-container {
 	padding-bottom: 15%;
 	background-color:rgb(232, 241, 246);
-	width: 100%;
+	width: 82%;
 	height: 140px;
+}
+
+
+.image-container .fa-image {
+    position: absolute;
+    font-size: 3rem; /* Taille de l'icône */
+    color: gray;    /* Couleur de l'icône */
+    z-index: 0;
 }

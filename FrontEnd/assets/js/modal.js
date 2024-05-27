@@ -77,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 modaleContent.appendChild(modaleFigure);
 
 
+
                 modaleBtn.onclick = function() {
                     modale.style.display = "block";
                 }
@@ -94,6 +95,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 const modaleBouton = document.createElement("button");
                 modaleBouton.textContent = "Ajouter une image";
+
+                let hr = document.createElement('hr');
+
                 modaleBouton.onclick = async function(){
                     modale.style.display = "none";
                     modaleAjoutImage.style.display = "block";
@@ -109,8 +113,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 modaleBouton.style.borderRadius = "60px";
                 modaleBouton.style.padding = "3%";
                 modaleBouton.style.marginTop = "20%";
+                modaleBouton.style.display = "flex";
+                modaleBouton.style.justifyContent = "space-around";
+                modaleBouton.style.alignItems = "center";
+                modaleBouton.style.height = "7%";
+                modaleBouton.style.fontSize = "16px";
 
                 modaleContent.appendChild(modaleBouton);
+                modaleContent.appendChild(hr)
 
                 const modaleAjoutImage = document.createElement("div");
                 modaleAjoutImage.classList.add("modal");
@@ -118,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 modaleAjoutImage.innerHTML = `
                     <form class="modal-content modalAddPhoto">
                         <span class="back"><i class="fa-solid fa-arrow-left"></i></span>
-                        <span class="close">&times;</span>
+                        <span class="close">X</span>
                         <h2>Ajouter photo</h2>
                         <!-- Utilisation d'une étiquette pour styliser la zone de sélection de fichier -->
                         <div class="image-container">
@@ -183,27 +193,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 document.getElementById('photo').addEventListener('change', function(event) {
                     const file = event.target.files[0]; // Récupère le premier fichier sélectionné
-                
                     if (file) {
                         const reader = new FileReader();
-                
                         reader.onload = function(e) {
-                            const imagePreview = document.getElementById('imagePreview');
-                            const previewImage = document.querySelector('.preview-image');
-                            const imageIcon = document.getElementsByClassName('.fa-image')
-                            imagePreview.innerHTML = ''; // Efface tout contenu précédent
-                
-                            const img = document.createElement('img');
+                            // Création de l'élément img ou utilisation de l'existant
+                            let img = imagePreview.querySelector('img');
+                            if (!img) {
+                                img = document.createElement('img');
+                                imagePreview.innerHTML = ''; // Nettoyage du texte initial
+                                imagePreview.appendChild(img);
+                            }
                             img.src = e.target.result;
-                            img.alt = file.name;
-                            img.style.maxWidth = '100%'; // Optionnel : limite la largeur de l'image à 100%
-                
-                            imagePreview.appendChild(img);
-                            previewImage.src = e.target.result; // Affiche l'image dans l'élément img avec la classe 'preview-image'
-                            previewImage.style.display = 'block'; // Affiche l'image
+                            img.style.display = 'block'; // Afficher l'image
+                            icon.style.display = 'none'; // Cacher l'icône
                         };
-                
-                        reader.readAsDataURL(file); // Lit le contenu du fichier en tant qu'URL de données
+                        reader.readAsDataURL(file);
+                    } else {
+                        // Réinitialiser si aucun fichier n'est sélectionné
+                        const img = imagePreview.querySelector('img');
+                        if (img) {
+                            img.style.display = 'none';
+                        }
+                        icon.style.display = 'block'; // Afficher l'icône
+                    
                     }
                 });
             })
