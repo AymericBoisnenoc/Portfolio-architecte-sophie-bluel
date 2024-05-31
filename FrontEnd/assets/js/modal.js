@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let modale;
 
     if (loged === 'true') {
-        console.log('La modale peut être ouverte');
 
         fetch('http://localhost:5678/api/works')
             .then(response => {
@@ -242,7 +241,6 @@ function ajouterImage(imageData) {
             return response.json(); // Parse la réponse JSON
         })
         .then(data => {
-            console.log('Image ajoutée avec succès');
             return data; // Retourne les données pour la chaîne de promesse
         })
         .catch(error => {
@@ -278,7 +276,6 @@ function supprimerImage(imageId) {
             if (!response.ok) {
                 throw new Error('Erreur lors de la suppression de l\'image');
             }
-            console.log('Image supprimée avec succès');
             return imageId; // Retourne l'ID de l'image supprimée pour la chaîne de promesse
         })
         .catch(error => {

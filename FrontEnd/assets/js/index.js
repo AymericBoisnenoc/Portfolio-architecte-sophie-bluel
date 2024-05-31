@@ -11,7 +11,6 @@ fetch('http://localhost:5678/api/works')
     .then(projet => {
         // Stockage des données récupérées dans le tableau
         tableau = projet;
-        console.log('Voici les éléments du tableau :', tableau);
         
         // Affichage initial de la galerie
         afficherGalerie();
@@ -113,8 +112,6 @@ function filtrerGalerie(selectedCategoryId) {
 
 // Après que l'utilisateur admin soit connecté 
 const loged = window.sessionStorage.getItem('loged'); // Utiliser getItem pour récupérer la valeur
-
-console.log(loged);
 const logout = document.querySelector('header nav .logout');
 
 if (loged === 'true') { // Utiliser === pour comparer correctement

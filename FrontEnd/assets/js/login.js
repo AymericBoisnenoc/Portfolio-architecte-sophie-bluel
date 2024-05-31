@@ -33,9 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('userId', data.userId);
                 window.sessionStorage.setItem('loged', 'true'); // Définir loged à true dans sessionStorage
-                console.log("Authentification réussie.");
                 // Rediriger vers 'index.html'
-                console.log(data)
                 location.href = 'index.html';
                 })
             } else {
@@ -43,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         })
         .catch(function(err) {
-            console.log(err);
         });
     });
 });
