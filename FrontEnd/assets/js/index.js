@@ -72,19 +72,12 @@ function genererMenuCategories() {
         categoryContainer.style.justifyContent = "center";
     });
 
-    const allButton = document.createElement('button');
-    allButton.classList.add('category-button');
-    allButton.textContent = 'Toutes les catégories';
-    allButton.addEventListener('click', () => filtrerGalerie(0));
-    categoryContainer.appendChild(allButton);
 
     // ajout d'un if pour lorsque l'utilisateur se connecte masquer les boutons
     if (loged === 'true'){
         allButton.style.display = 'none'
         categoryContainer.style.display = 'none'
     }
-}
-
 function filtrerGalerie(selectedCategoryId) {
     if (selectedCategoryId === 0) {
         // Si la catégorie sélectionnée est "Toutes les catégories", affiche tous les éléments
