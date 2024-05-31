@@ -50,17 +50,23 @@ function afficherGalerie() {
     });
 }
 
-// Fonction pour générer dynamiquement le menu des catégories
 function genererMenuCategories() {
     const categories = [...new Set(tableau.map(item => item.categoryId))];
     const categoryContainer = document.querySelector('.categories');
     const categoryNames = {
-        1:"Objets",
-        2:"Appartements",
-        3:"Hotels & restaurants",
-        4:"Tous"
-    }
+        1: "Objets",
+        2: "Appartements",
+        3: "Hotels & restaurants",
+    };
 
+    // Créer et ajouter le bouton "Toutes les catégories" en premier
+    const allButton = document.createElement('button');
+    allButton.classList.add('category-button');
+    allButton.textContent = 'Toutes les catégories';
+    allButton.addEventListener('click', () => filtrerGalerie(0));
+    categoryContainer.appendChild(allButton);
+
+    // Ajouter les autres boutons de catégories
     categories.forEach(category => {
         const button = document.createElement('button');
         button.classList.add('category-button');
@@ -68,10 +74,12 @@ function genererMenuCategories() {
         button.dataset.categoryId = category;
         button.addEventListener('click', () => filtrerGalerie(category));
         categoryContainer.appendChild(button);
-        categoryContainer.style.display = "flex";
-        categoryContainer.style.justifyContent = "center";
     });
 
+    // Configurer l'affichage du container des catégories
+    categoryContainer.style.display = "flex";
+    categoryContainer.style.justifyContent = "center";
+}
 
     // ajout d'un if pour lorsque l'utilisateur se connecte masquer les boutons
     if (loged === 'true'){
